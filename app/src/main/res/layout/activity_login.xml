@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/orbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -80,9 +80,9 @@
         android:layout_marginTop="8dp"
         android:text="Continue with"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintEnd_toEndOf="@+id/orbutton"
+        app:layout_constraintStart_toStartOf="@+id/orbutton"
+        app:layout_constraintTop_toBottomOf="@+id/orbutton" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"

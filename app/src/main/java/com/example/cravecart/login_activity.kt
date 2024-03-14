@@ -23,6 +23,10 @@ class login_activity : AppCompatActivity() {
             val intent=Intent(this,Signin_Activity::class.java)
             startActivity(intent)
         }
+        binding.orbutton.setOnClickListener{
+            val intent=Intent(this,Chooselocation::class.java)
+            startActivity(intent)
+        }
 
     }
 }
