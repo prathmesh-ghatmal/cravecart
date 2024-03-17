@@ -1,6 +1,7 @@
 package com.example.cravecart.Fragment
 
 import android.os.Bundle
+import android.os.TestLooperManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,11 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding=FragmentHomeBinding.inflate(inflater,container,false)
+
+        binding.viewmenu.setOnClickListener{
+            val bottomSheetDialog=BottomsheetFragment()
+            bottomSheetDialog.show(parentFragmentManager,"Test")
+        }
         return binding.root
 
 
