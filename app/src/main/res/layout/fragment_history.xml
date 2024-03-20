@@ -20,6 +20,7 @@
             android:fontFamily="@font/latobold"
             android:text="Recent buy"
             android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +41,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/BuyAgainFoodIMage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/menu2"
@@ -49,30 +50,33 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/BuyAgainFoodname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/latoregular"
                     android:text="Food Name"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/textView18"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/BuyAgainFoodPrice"
+                    app:layout_constraintStart_toEndOf="@+id/BuyAgainFoodIMage"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/BuyAgainFoodPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/latoregular"
                     android:text="Rs75"
                     android:textColor="@color/grey"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    app:layout_constraintStart_toEndOf="@+id/BuyAgainFoodIMage"
+                    app:layout_constraintTop_toBottomOf="@+id/BuyAgainFoodname" />
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/OrderStatus"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="32dp"
@@ -91,15 +95,19 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/latobold"
-            android:text="TextView"
+            android:text="Previously buy"
             android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="409dp"
+            android:id="@+id/BuyAgainRecyclerView"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
