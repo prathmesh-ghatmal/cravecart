@@ -1,11 +1,13 @@
 package com.example.cravecart.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cravecart.Payoutactivity
 import com.example.cravecart.R
 import com.example.cravecart.adapter.cartadapter
 import com.example.cravecart.databinding.FragmentCartBinding
@@ -37,6 +39,10 @@ class CartFragment : Fragment() {
         val adapter=cartadapter(ArrayList(cfoodname),ArrayList(cprice),ArrayList(cimage))
         binding.cartrecyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.cartrecyclerview.adapter=adapter
+        binding.Proceedbutton.setOnClickListener {
+            val intent=Intent(requireContext(),Payoutactivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
