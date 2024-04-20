@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/LoginEmail"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:layout_marginTop="24dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/LoginPassword"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
@@ -58,9 +58,9 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintEnd_toEndOf="@+id/LoginEmail"
+        app:layout_constraintStart_toStartOf="@+id/LoginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/LoginEmail" />
 
     <TextView
         android:id="@+id/orbutton"
@@ -69,9 +69,9 @@
         android:layout_marginTop="16dp"
         android:text="or"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/LoginPassword"
+        app:layout_constraintStart_toStartOf="@+id/LoginPassword"
+        app:layout_constraintTop_toBottomOf="@+id/LoginPassword" />
 
     <TextView
         android:id="@+id/textView6"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/orbutton" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/LoginGoogleButton"
         android:layout_width="152dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
@@ -115,11 +115,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/LoginGoogleButton"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginbutton1"
+        android:id="@+id/LoginButton"
         android:layout_width="152dp"
         android:layout_height="57dp"
         android:layout_marginTop="25dp"
@@ -133,7 +133,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginGoogleButton" />
 
     <TextView
         android:id="@+id/Donthavebutton"
@@ -144,7 +144,7 @@
         android:text="Don't have an account?"
         android:textColor="@color/grey"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/loginbutton1"
-        app:layout_constraintStart_toStartOf="@+id/loginbutton1"
-        app:layout_constraintTop_toBottomOf="@+id/loginbutton1" />
+        app:layout_constraintEnd_toEndOf="@+id/LoginButton"
+        app:layout_constraintStart_toStartOf="@+id/LoginButton"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

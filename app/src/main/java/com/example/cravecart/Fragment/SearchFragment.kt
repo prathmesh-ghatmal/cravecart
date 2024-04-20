@@ -40,10 +40,10 @@ private lateinit var adapter: menuadapter
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding=FragmentSearchBinding.inflate(inflater,container,false)
+      /*  binding=FragmentSearchBinding.inflate(inflater,container,false)
         adapter= menuadapter(filteredmMenuFoodName,filteredmMenuFoodPrice,filteredmMenuFoodImage,requireContext())
         binding.menurecyclerview.layoutManager=LinearLayoutManager(requireContext())
-        binding.menurecyclerview.adapter=adapter
+        binding.menurecyclerview.adapter=adapter*/
 
 
         //setup for searchview
