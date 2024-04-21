@@ -52,13 +52,15 @@ class CartFragment : Fragment() {
         binding.Proceedbutton.setOnClickListener {
             //get order details before proceeding to checkout
             getOrderItemsDetails()
-            val intent = Intent(requireContext(), Payoutactivity::class.java)
-            startActivity(intent)
+
         }
         return binding.root
     }
 
     private fun getOrderItemsDetails() {
+        //database Reference
+        database = FirebaseDatabase.getInstance()
+        userId = auth.currentUser?.uid ?: ""
         val orderReference: DatabaseReference =
             database.reference.child("user").child(userId).child("cartItems")
 
@@ -66,7 +68,7 @@ class CartFragment : Fragment() {
         val foodPrice = mutableListOf<String>()
         val foodImage = mutableListOf<String>()
         val foodDescription = mutableListOf<String>()
-        val foodIngredient = mutableListOf<String>()
+
 
         //get items Quantities
 
@@ -96,7 +98,7 @@ class CartFragment : Fragment() {
             ) {
                 if (isAdded && context!=null){
                     val intent=Intent(requireContext(),Payoutactivity::class.java)
-                    intent.putExtra("FoodNames",foodName as ArrayList<String>)
+                    intent.putStringArrayListExtra("FoodNames",foodName as ArrayList<String>)
                     intent.putExtra("FoodPrice",foodPrice as ArrayList<String>)
                     intent.putExtra("FoodImage",foodImage as ArrayList<String>)
                     intent.putExtra("FoodDescription",foodDescription as ArrayList<String>)
@@ -144,7 +146,7 @@ class CartFragment : Fragment() {
             }
 
             private fun setAdapter() {
-                val adapter = cartadapter(
+                cartadapter = cartadapter(
                     requireContext(),
                     foodNames,
                     foodPrices,
@@ -154,7 +156,7 @@ class CartFragment : Fragment() {
                 )
                 binding.cartrecyclerview.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                binding.cartrecyclerview.adapter = adapter
+                binding.cartrecyclerview.adapter = cartadapter
             }
 
             override fun onCancelled(error: DatabaseError) {
