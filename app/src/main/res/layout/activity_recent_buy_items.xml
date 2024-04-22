@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@android:color/transparent"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     tools:context=".recentBuyItems">
     <ImageButton
         android:id="@+id/RecentBuyBackButton"

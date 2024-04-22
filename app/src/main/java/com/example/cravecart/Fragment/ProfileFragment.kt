@@ -29,12 +29,28 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         setUserData()
+        binding.apply {
+            ProfilePhone.isEnabled=false
+            ProfileEmail.isEnabled=false
+            ProfileName.isEnabled=false
+            ProfileAddress.isEnabled=false
+            binding.EditButton.setOnClickListener {
+               ProfilePhone.isEnabled=!ProfilePhone.isEnabled
+               ProfileName.isEnabled=!ProfileName.isEnabled
+               ProfileEmail.isEnabled=!ProfileEmail.isEnabled
+               ProfileAddress.isEnabled=!ProfileAddress.isEnabled
+            }
+        }
         binding.SaveInformationButton.setOnClickListener {
             val name=binding.ProfileName.text.toString()
             val email=binding.ProfileEmail.text.toString()
             val address=binding.ProfileAddress.text.toString()
             val phone=binding.ProfilePhone.text.toString()
             updateUserData(name,email,address,phone)
+            binding.apply {  ProfilePhone.isEnabled=false
+                ProfileEmail.isEnabled=false
+                ProfileName.isEnabled=false
+                ProfileAddress.isEnabled=false }
         }
 
         return binding.root

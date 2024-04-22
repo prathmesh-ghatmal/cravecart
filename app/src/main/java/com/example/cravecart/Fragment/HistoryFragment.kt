@@ -28,7 +28,7 @@ class HistoryFragment : Fragment() {
    private lateinit var database: FirebaseDatabase
    private lateinit var auth: FirebaseAuth
    private lateinit var  userId:String
-   private var listOfOrderItems:MutableList<OrderDetails> = mutableListOf()
+   private  var listOfOrderItems:ArrayList<OrderDetails> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +48,10 @@ class HistoryFragment : Fragment() {
     }
 
     private fun seeItemRecentBuy() {
+        listOfOrderItems.reverse()
         listOfOrderItems.firstOrNull()?.let { recentBuy->
             val intent=Intent(requireContext(),recentBuyItems::class.java)
-            intent.putExtra("RecentBuyOrderItems",recentBuy)
+           intent.putExtra("RecentBuyOrderItems",listOfOrderItems)
             startActivity(intent)
         }
     }
@@ -69,7 +70,7 @@ class HistoryFragment : Fragment() {
                     val buyHistoryItem=buySnapShot.getValue(OrderDetails::class.java)
                     buyHistoryItem?.let { listOfOrderItems.add(it) }
                 }
-                listOfOrderItems.reverse()
+               listOfOrderItems.reverse()
                 if(listOfOrderItems.isNotEmpty()){
                     setDataInRecentBuyItem()
                     setPreviousBuyItemsRecyclerView()
