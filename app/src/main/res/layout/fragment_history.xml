@@ -37,6 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/BuyAgainFoodItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

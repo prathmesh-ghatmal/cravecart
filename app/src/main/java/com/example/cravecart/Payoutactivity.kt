@@ -5,9 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.cravecart.Fragment.CartFragment
 
 import com.example.cravecart.Fragment.CongratsBottomSheetFragment
+import com.example.cravecart.Model.OrderDetails
 import com.example.cravecart.databinding.ActivityPayoutactivityBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,11 +28,11 @@ class Payoutactivity : AppCompatActivity() {
     private lateinit var totalamount: String
     private var foodItemName: ArrayList<String> = arrayListOf()
     private var foodItemPrice: ArrayList<String> = arrayListOf()
-
     private var foodItemImage: ArrayList<String> = arrayListOf()
     private var foosItemDescription: ArrayList<String> = arrayListOf()
     private var foodItemQuantities: ArrayList<Int> = arrayListOf()
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var userId: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,17 +74,65 @@ class Payoutactivity : AppCompatActivity() {
         }
 
         // if(foodItemQuantities !=null){ for (name in foodItemQuantities){Log.d("bappa","notworks${name}")}}else{Log.d("bappa","notworks")}
-        var total = totalAmount()
+        totalamount = totalAmount().toString()
         //   var i= checki()
 
-        binding.PayoutTotal.setText(total.toString())
+        binding.PayoutTotal.setText(totalamount)
         binding.PlaceMyOrder.setOnClickListener {
-            val bottomsheetDialog = CongratsBottomSheetFragment()
-            bottomsheetDialog.show(supportFragmentManager, "Test")
+            //get data from textview
+            name = binding.PayoutName.text.toString().trim()
+            phone = binding.PayoutPhone.text.toString().trim()
+            address = binding.PayoutAddress.text.toString().trim()
+            if (name.isBlank() || phone.isBlank() || address.isBlank()) {
+                Toast.makeText(this, "please enter all details", Toast.LENGTH_SHORT).show()
+            } else {
+                placeOrder()
+            }
+
         }
         binding.PlaceOrderBackButton.setOnClickListener {
             finish()
         }
+    }
+
+    private fun placeOrder() {
+        userId = auth.currentUser?.uid ?: ""
+        val time = System.currentTimeMillis()
+        val itemPushKey = databaseReference.child("orderDetails").push().key
+        val orderDetails = OrderDetails(
+            userId,
+            name,
+            foodItemName,
+            foodItemPrice,
+            foodItemImage,
+            foodItemQuantities,
+            address,
+            totalamount,
+            phone,
+            time,
+            itemPushKey,
+            false,
+            false
+        )
+        val orderReference = databaseReference.child("orderDetails").child(itemPushKey!!)
+        orderReference.setValue(orderDetails).addOnSuccessListener {
+            val bottomsheetDialog = CongratsBottomSheetFragment()
+            bottomsheetDialog.show(supportFragmentManager, "Test")
+            removeItemFromCart()
+            addOrderToHistory(orderDetails)
+        }.addOnFailureListener { Toast.makeText(this, "Order Failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun addOrderToHistory(orderDetails: OrderDetails) {
+       databaseReference.child("user").child(userId).child("BuyHistory")
+           .child(orderDetails.itemPushKey!!)
+           .setValue(orderDetails).addOnSuccessListener {  }
+    }
+
+    private fun removeItemFromCart() {
+    val cartItemReference=databaseReference.child("user").child(userId).child("cartItems")
+        cartItemReference.removeValue()
     }
 
     private fun totalAmount(): Int {

@@ -1,14 +1,18 @@
 package com.example.cravecart.adapter
 
+import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cravecart.databinding.BuyAgainItemBinding
 
 class Buyagainadapter(
-    private val buyagainFoodname: ArrayList<String>,
-    private val buyagainFoodprice: ArrayList<String>,
-    private val buyagainFoodimage: ArrayList<Int>
+    private val buyagainFoodname: MutableList<String>,
+    private val buyagainFoodprice: MutableList<String>,
+    private val buyagainFoodimage: MutableList<String>,
+    private var requireContext:Context
 ): RecyclerView.Adapter<Buyagainadapter.BuyagainViewHolder>() {
     override fun onBindViewHolder(holder: BuyagainViewHolder, position: Int) {
 
@@ -21,11 +25,13 @@ class Buyagainadapter(
     }
 
     override fun getItemCount(): Int =buyagainFoodname.size
-    class BuyagainViewHolder(private val binding: BuyAgainItemBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(foodname: String, foodprice: String, foodimage: Int) {
+  inner  class BuyagainViewHolder(private val binding: BuyAgainItemBinding):RecyclerView.ViewHolder(binding.root) {
+        fun bind(foodname: String, foodprice: String, foodimage: String) {
             binding.BuyAgainFoodname.text=foodname
             binding.BuyAgainFoodPrice.text=foodprice
-            binding.BuyAgainFoodIMage.setImageResource(foodimage)
+            val uriString=foodimage
+            val uri=Uri.parse(uriString)
+            Glide.with(requireContext).load(uri).into(binding.BuyAgainFoodIMage)
         }
 
     }
