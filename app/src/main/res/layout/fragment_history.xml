@@ -81,6 +81,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="32dp"
+                    android:backgroundTint="#B8B7B7"
                     app:cardBackgroundColor="@android:color/holo_green_dark"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +98,7 @@
                     android:fontFamily="@font/latobold"
                     android:text="Recived"
                     android:textColor="@color/white"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/OrderStatus"
                     app:layout_constraintStart_toStartOf="@+id/OrderStatus"
                     app:layout_constraintTop_toBottomOf="@+id/OrderStatus" />

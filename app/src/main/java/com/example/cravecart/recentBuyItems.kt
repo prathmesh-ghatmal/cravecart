@@ -22,7 +22,7 @@ class recentBuyItems : AppCompatActivity() {
         val recentOrderItems=intent.getSerializableExtra("RecentBuyOrderItems") as ArrayList<OrderDetails>
         recentOrderItems?.let { orderDetails ->
             if (orderDetails.isNotEmpty()){
-                val recentOrderItem=orderDetails[0]
+                val recentOrderItem=orderDetails.last()
                 allFoodNames=recentOrderItem.foodNames as ArrayList<String>
                 allFoodPrices=recentOrderItem.foodPrices as ArrayList<String>
                 allFoodImages=recentOrderItem.foodImages as ArrayList<String>

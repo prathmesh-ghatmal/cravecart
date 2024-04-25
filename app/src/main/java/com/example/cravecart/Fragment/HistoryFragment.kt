@@ -1,8 +1,10 @@
 package com.example.cravecart.Fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,8 @@ class HistoryFragment : Fragment() {
    private lateinit var auth: FirebaseAuth
    private lateinit var  userId:String
    private  var listOfOrderItems:ArrayList<OrderDetails> = arrayListOf()
+    private  var rev:ArrayList<OrderDetails> = arrayListOf()
+    private  var retriverev:ArrayList<OrderDetails> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +48,29 @@ class HistoryFragment : Fragment() {
         binding.BuyAgainFoodItem.setOnClickListener {
             seeItemRecentBuy()
         }
+
+        binding.RecivedButton.setOnClickListener { updateOrderStatus() }
         return binding.root
     }
 
+    private fun updateOrderStatus() {
+        val itemPushKey=listOfOrderItems[0].itemPushKey
+        val completeOrderReference=database.reference.child("completedOrder").child(itemPushKey!!)
+        completeOrderReference.child("paymentRecived").setValue(true)
+    }
+
     private fun seeItemRecentBuy() {
-        listOfOrderItems.reverse()
-        listOfOrderItems.firstOrNull()?.let { recentBuy->
+        rev= listOfOrderItems
+        Log.d("checkcheck",rev.last().foodNames.toString()+"hi")
+        for (i in 0 until rev.size){
+            Log.d("checkcheck",rev[i].foodNames.toString())
+            Log.d("checkcheck",i.toString())
+
+        }
+
+        rev.last()?.let { recentBuy->
             val intent=Intent(requireContext(),recentBuyItems::class.java)
-           intent.putExtra("RecentBuyOrderItems",listOfOrderItems)
+           intent.putExtra("RecentBuyOrderItems",rev)
             startActivity(intent)
         }
     }
@@ -70,8 +89,9 @@ class HistoryFragment : Fragment() {
                     val buyHistoryItem=buySnapShot.getValue(OrderDetails::class.java)
                     buyHistoryItem?.let { listOfOrderItems.add(it) }
                 }
-               listOfOrderItems.reverse()
-                if(listOfOrderItems.isNotEmpty()){
+                retriverev=listOfOrderItems
+               retriverev.reverse()
+                if(retriverev.isNotEmpty()){
                     setDataInRecentBuyItem()
                     setPreviousBuyItemsRecyclerView()
                 }
@@ -84,7 +104,7 @@ class HistoryFragment : Fragment() {
         })}
     private fun setDataInRecentBuyItem() {
         binding.BuyAgainFoodItem.visibility=View.VISIBLE
-        val recentOrderItem=listOfOrderItems.firstOrNull()
+        val recentOrderItem=retriverev.firstOrNull()
         recentOrderItem?.let {
             with(binding){
                 BuyAgainFoodname.text=it.foodNames?.firstOrNull()?:""
@@ -92,10 +112,11 @@ class HistoryFragment : Fragment() {
                 val image=it.foodImages?.firstOrNull()?:""
                 val uri= Uri.parse(image)
                 Glide.with(requireContext()).load(uri).into(BuyAgainFoodIMage)
-                listOfOrderItems.reverse()
-                if (listOfOrderItems.isNotEmpty()){
-
-
+                retriverev.reverse()
+              val isOrderAccepted=listOfOrderItems[0].orderAccepted
+                if (isOrderAccepted!!){
+                    OrderStatus.background.setTint(Color.GREEN)
+                    RecivedButton.visibility=View.VISIBLE
                 }
             }
         }
@@ -106,7 +127,7 @@ class HistoryFragment : Fragment() {
             val buyAgainFoodname= mutableListOf<String>()
             val buyAgainFoodprice= mutableListOf<String>()
             val buyAgainFoodimage=  mutableListOf<String>()
-            for (i in 1 until listOfOrderItems.size){
+            for (i in 0 until listOfOrderItems.size){
                 listOfOrderItems[i].foodNames?.firstOrNull()?.let { buyAgainFoodname.add(it) }
                 listOfOrderItems[i].foodPrices?.firstOrNull()?.let { buyAgainFoodprice.add(it) }
                 listOfOrderItems[i].foodImages?.firstOrNull()?.let { buyAgainFoodimage.add(it) }
